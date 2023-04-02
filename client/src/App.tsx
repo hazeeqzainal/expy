@@ -1,18 +1,20 @@
-import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Navbar from './components/Navbar';
+import NotFound from './components/NotFound';
+import Sidebar from './components/Sidebar';
+import Signup from './components/Signup';
+import { AuthProvider } from './utils/auth';
 
 function App() {
-  const [initialState, setState] = useState([]);
-  const url = '/api/hello ';
-
-  useEffect(() => {
-    fetch(url)
-      .then((response) => response.json())
-      .then(console.log);
-  }, []);
   return (
-    <div>
-      <h1>It works</h1>
-    </div>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 
